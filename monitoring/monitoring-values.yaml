@@ -1,0 +1,71 @@
+grafana:
+  adminUser: admin
+  adminPassword: admin123
+  service:
+    type: NodePort
+    nodePort: 32000
+  persistence:
+    enabled: true
+    storageClassName: openebs-hostpath
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
+
+prometheus:
+  service:
+    type: NodePort
+    nodePort: 30090
+  prometheusSpec:
+    retention: 7d
+    resources:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-hostpath
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
+
+alertmanager:
+  service:
+    type: NodePort
+    nodePort: 30093
+  alertmanagerSpec:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-hostpath
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+
+# k3s 是轻量 Kubernetes，scheduler/controller-manager/etcd 不是以 kubeadm 静态 Pod 方式暴露
+# 关闭这些监控项，避免出现无意义的 Target Down
+kubeScheduler:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+kubeEtcd:
+  enabled: false
+
+kubeProxy:
+  enabled: false
