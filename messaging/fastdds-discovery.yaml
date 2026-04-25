@@ -17,6 +17,10 @@ spec:
       - name: fastdds-discovery
         image: localhost/fastdds-discovery:v1
         imagePullPolicy: IfNotPresent
+        command:
+        - fastdds
+        args:
+        - discovery
         ports:
         - name: discovery
           containerPort: 11811
