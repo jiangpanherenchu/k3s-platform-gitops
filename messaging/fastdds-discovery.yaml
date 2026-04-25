@@ -15,17 +15,8 @@ spec:
     spec:
       containers:
       - name: fastdds-discovery
-        image: debian:bullseye-slim
+        image: localhost/fastdds-discovery:v1
         imagePullPolicy: IfNotPresent
-        command:
-        - /bin/sh
-        - -c
-        args:
-        - |
-          apt-get update &&
-          apt-get install -y --no-install-recommends fastdds-tools ca-certificates &&
-          rm -rf /var/lib/apt/lists/* &&
-          fastdds discovery -l 0.0.0.0 -p 11811
         ports:
         - name: discovery
           containerPort: 11811
