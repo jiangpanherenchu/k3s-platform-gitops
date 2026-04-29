@@ -90,7 +90,7 @@ spec:
       serviceAccountName: k3s-control-api
       containers:
       - name: k3s-control-api
-        image: 192.168.30.98:30500/k3s-control-api:v1
+        image: registry.local:30500/k3s-control-api:v1
         imagePullPolicy: IfNotPresent
         env:
         - name: GIN_MODE

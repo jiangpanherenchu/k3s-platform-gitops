@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: fastdds-discovery
-        image: 192.168.30.97:30500/fastdds-discovery:v1
+        image: registry.local:30500/fastdds-discovery:v1
         imagePullPolicy: IfNotPresent
         command:
         - fastdds

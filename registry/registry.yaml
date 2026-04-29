@@ -31,6 +31,8 @@ spec:
       labels:
         app: registry
     spec:
+      nodeSelector:
+        registry-node: "true"
       containers:
       - name: registry
         image: registry:2
